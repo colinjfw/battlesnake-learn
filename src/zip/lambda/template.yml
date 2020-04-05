@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Battlesnake serverless snake
+Resources:
+  Function:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      CodeUri: .
+      Description: Battlesnake serverless snake
+      MemorySize: 512
+      Timeout: 10
+      Policies: []
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: '{proxy+}'
+            Method: ANY
