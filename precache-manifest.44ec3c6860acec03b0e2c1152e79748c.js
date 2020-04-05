@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "3b367e9ff791c0905766",
+    "revision": "0e1b8287e398ca7510a9",
     "url": "/battlesnake-learn/static/css/main.4face8fc.chunk.css"
   },
   {
-    "revision": "3b367e9ff791c0905766",
-    "url": "/battlesnake-learn/static/js/main.3b367e9f.chunk.js"
+    "revision": "0e1b8287e398ca7510a9",
+    "url": "/battlesnake-learn/static/js/main.0e1b8287.chunk.js"
   },
   {
     "revision": "b00acae54522570a621a",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/battlesnake-learn/static/js/runtime~main.803f834a.js"
   },
   {
-    "revision": "8ae10bc17337d249a0386c8423402196",
+    "revision": "0afd5a8cec2d6fe835618745ac986ec3",
     "url": "/battlesnake-learn/index.html"
   }
 ];

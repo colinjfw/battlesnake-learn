@@ -1,7 +1,7 @@
 {
   "main.css": "/battlesnake-learn/static/css/main.4face8fc.chunk.css",
-  "main.js": "/battlesnake-learn/static/js/main.3b367e9f.chunk.js",
-  "main.js.map": "/battlesnake-learn/static/js/main.3b367e9f.chunk.js.map",
+  "main.js": "/battlesnake-learn/static/js/main.0e1b8287.chunk.js",
+  "main.js.map": "/battlesnake-learn/static/js/main.0e1b8287.chunk.js.map",
   "static/css/1.bdfe9865.chunk.css": "/battlesnake-learn/static/css/1.bdfe9865.chunk.css",
   "static/js/1.b00acae5.chunk.js": "/battlesnake-learn/static/js/1.b00acae5.chunk.js",
   "static/js/1.b00acae5.chunk.js.map": "/battlesnake-learn/static/js/1.b00acae5.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/main.4face8fc.chunk.css.map": "/battlesnake-learn/static/css/main.4face8fc.chunk.css.map",
   "static/css/1.bdfe9865.chunk.css.map": "/battlesnake-learn/static/css/1.bdfe9865.chunk.css.map",
   "index.html": "/battlesnake-learn/index.html",
-  "precache-manifest.5c1b1442694f97aa5c72dee660270f1b.js": "/battlesnake-learn/precache-manifest.5c1b1442694f97aa5c72dee660270f1b.js",
+  "precache-manifest.44ec3c6860acec03b0e2c1152e79748c.js": "/battlesnake-learn/precache-manifest.44ec3c6860acec03b0e2c1152e79748c.js",
   "service-worker.js": "/battlesnake-learn/service-worker.js"
 }
