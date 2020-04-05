@@ -1,10 +1,13 @@
-html, body, #root {
-  height: 100%;
-  font-family: Poppins, sans-serif;
+.height-page {
+  height: calc(100vh - 75px);
 }
-
-@media (max-width: 600px) {
-  .board-row {
-    flex-direction: column;
-  }
+header {
+  height: 75px;
+}
+.bg-vs-dark {
+  background-color: #202124;
+  border-color: #858585 !important;
+}
+.bg-vs-gray {
+  background-color: #393e42;
 }

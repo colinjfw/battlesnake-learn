@@ -17,20 +17,20 @@ export const initialFrame: Frame = {
   food: [
     {
       x: 3,
-      y: 2
+      y: 2,
     },
     {
       x: 1,
-      y: 7
+      y: 7,
     },
     {
       x: 7,
-      y: 8
+      y: 8,
     },
     {
       x: 8,
-      y: 1
-    }
+      y: 1,
+    },
   ],
   snake: {
     id: "test",
@@ -40,21 +40,25 @@ export const initialFrame: Frame = {
     body: [
       {
         x: 5,
-        y: 5
+        y: 5,
       },
       {
         x: 5,
-        y: 6
-      }
-    ]
-  }
+        y: 6,
+      },
+    ],
+  },
 };
 
 interface Canceller {
-  cancelled(): boolean
+  cancelled(): boolean;
 }
 
-export async function run(code: Code, canceller: Canceller, emit: (frame: UIFrame) => void) {
+export async function run(
+  code: Code,
+  canceller: Canceller,
+  emit: (frame: UIFrame) => void
+) {
   const start: Frame = deepCopy(initialFrame);
   start.snake.color = code.start({}).color;
 
@@ -87,7 +91,7 @@ export async function run(code: Code, canceller: Canceller, emit: (frame: UIFram
 }
 
 function ateFood(head: Point, food: Point[]) {
-  return food.findIndex(f => f.x === head.x && f.y === head.y);
+  return food.findIndex((f) => f.x === head.x && f.y === head.y);
 }
 
 export class MoveError extends Error {
@@ -133,7 +137,7 @@ function moveTransform(frame: Frame, move: string): Point {
       throw new MoveError(`Unkown move "${move}"`, turn);
   }
 
-  snake.body.forEach(part => {
+  snake.body.forEach((part) => {
     if (part.x === head.x && part.y === head.y)
       throw new MoveError(`Snake moved into itself!`, turn);
   });
@@ -142,22 +146,22 @@ function moveTransform(frame: Frame, move: string): Point {
 }
 
 function sleep(ms = 0) {
-  return new Promise(r => setTimeout(r, ms));
+  return new Promise((r) => setTimeout(r, ms));
 }
 
 export function toMoveAPI(frame: Frame): MoveAPI {
   return {
     game: {
-      id: "test"
+      id: "test",
     },
     turn: frame.turn,
     board: {
       height: frame.height,
       width: frame.width,
       food: frame.food,
-      snakes: [frame.snake]
+      snakes: [frame.snake],
     },
-    you: frame.snake
+    you: frame.snake,
   };
 }
 

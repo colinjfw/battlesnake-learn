@@ -14,14 +14,14 @@ export interface Snake {
 
 export interface MoveAPI {
   game: {
-    id: string
-  },
+    id: string;
+  };
   turn: number;
   board: {
     height: number;
     width: number;
     food: Point[];
-    snakes: Snake[]
-  },
-  you: Snake
+    snakes: Snake[];
+  };
+  you: Snake;
 }

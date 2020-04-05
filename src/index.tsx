@@ -1,60 +1,62 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Row, Col, Button } from "./ui";
-import Editor from "./Editor";
+import raw from "raw.macro";
+
+import Editor from "@monaco-editor/react";
+import { editor } from "monaco-editor";
+
 import Board from "./Board";
 import * as engine from "./engine";
 import * as code from "./code";
-import example from "./example";
+import { tutorials } from "./tutorial";
+import { Logo } from "./ui";
 
+import "@primer/css/dist/primer.css";
 import "./index.css";
-import "normalize.css";
-
-const styles: { [k: string]: React.CSSProperties } = {
-  controls: {
-    textAlign: "center",
-    paddingTop: "10px"
-  },
-  pauseButton: {
-    backgroundColor: "#399AF2",
-    borderRadius: "50px",
-    padding: "0.5em 1em",
-    color: "white",
-  },
-  playButton: {
-    backgroundColor: "#2fbfa0",
-    borderRadius: "50px",
-    padding: "0.5em 1.5em",
-    color: "white",
-  },
-  editor: {
-    height: '100vh',
-    flex: 2,
-    padding: "0px 10px ",
-  },
-  board: { height: 352 },
-  error: {
-    textAlign: "center",
-    color: 'white',
-    height: "1.8em"
-  }
-};
 
 interface AppState {
   code: string;
+  tutorial: number;
   running?: boolean;
   cancelled?: boolean;
   frame: engine.Frame;
   error?: Error;
 }
 
+const basicSnake = raw("./examples/basic.js");
+const placeholder = raw("./examples/placeholder.js");
+
 class App extends React.Component<{}, AppState> {
+  initial = localStorage.getItem("code") || placeholder;
+  editor: editor.IStandaloneCodeEditor | undefined;
   state: AppState = {
-    code: example,
-    frame: engine.initialFrame
+    tutorial: parseInt(localStorage.getItem("step") || "0"),
+    code: this.initial,
+    frame: engine.initialFrame,
   };
 
+  componentDidMount = () => {
+    setTimeout(this.handleStart, 1000);
+  }
+
   cancelled = () => !!this.state.cancelled;
+
+  handleInit = () => {
+    if (!this.editor) {
+      return;
+    }
+    this.editor.onDidChangeModelContent(() => {
+      this.handleCodeChange(this.editor!.getValue());
+    });
+  }
+
+  handleSetTutorial = (change: number) => {
+    const tutorial = this.state.tutorial + change;
+    this.setState({ tutorial });
+    localStorage.setItem("step", tutorial.toString());
+  };
+  handleNext = () => this.handleSetTutorial(1);
+  handlePrev = () => this.handleSetTutorial(-1);
 
   handleCodeChange = (code: string) => {
     localStorage.setItem("code", code);
@@ -65,7 +67,7 @@ class App extends React.Component<{}, AppState> {
     this.setState({
       cancelled: true,
       running: false,
-      frame: engine.initialFrame
+      frame: engine.initialFrame,
     });
   };
 
@@ -84,8 +86,9 @@ class App extends React.Component<{}, AppState> {
   run = background(async () => {
     this.setState({ cancelled: false });
     try {
-      const snake = code.evaluate(this.state.code);
-      await engine.run(snake, this, frame => {
+      const js = this.state.code === placeholder ? basicSnake : this.state.code;
+      const snake = code.evaluate(js);
+      await engine.run(snake, this, (frame) => {
         this.setState({ frame, error: undefined });
       });
       this.setState({ running: false });
@@ -96,38 +99,78 @@ class App extends React.Component<{}, AppState> {
   });
 
   render() {
-    const { error, code, running, frame } = this.state;
-
+    const { tutorial, error, code, running, frame } = this.state;
+    const Tutorial = tutorials[tutorial];
     return (
-      <Row className="board-row">
-        <Col style={styles.editor}>
-          <Editor value={code} onChange={this.handleCodeChange} />
-        </Col>
-        <Col style={styles.board}>
-          <Row>
-            <Col style={styles.error}>
-              <span>{error ? error.message : ""}</span>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
+      <>
+        <header className="Header bg-gray-dark">
+          <div className="Header-item">
+            <a href="https://battlesnake.com" target="_blank"><Logo /></a>
+          </div>
+          <div className="Header-item Header-item--full f3 text-mono">
+            Learn to Battlesnake!
+          </div>
+        </header>
+        <main className="height-page d-flex flex-content-stretch">
+          <div className="flex-1 markdown-body bg-gray-light position-relative height-page overflow-scroll p-4">
+            <Tutorial />
+            <div className="BtnGroup d-flex flex-justify-center p-3">
+              {tutorial > 0 && (
+                <button className="btn BtnGroup-item" onClick={this.handlePrev}>
+                  &lt; Back
+                </button>
+              )}
+              {tutorial < tutorials.length - 1 && (
+                <button className="btn BtnGroup-item btn-primary" onClick={this.handleNext}>
+                  Next &gt;
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="flex-1 bg-vs-dark height-page overflow-hidden">
+            <Editor
+              height="100%"
+              value={this.initial}
+              editorDidMount={(_, ref) => {
+                this.editor = ref;
+                this.handleInit();
+              }}
+              language="javascript"
+              theme="dark"
+              options={{
+                minimap: { enabled: false },
+                scrollbar: { vertical: "hidden", verticalScrollbarSize: 0 },
+              }}
+            />
+          </div>
+          <div className="flex-1 bg-vs-dark height-page border-left">
+            <div className="p-2 height-page">
+              <div className="text-center text-red" style={{ height: '25px' }}>
+                {error && error.message}
+              </div>
               <Board
                 food={frame.food}
                 columns={frame.game.width}
                 rows={frame.game.height}
                 snakes={[frame.snake]}
               />
-            </Col>
-          </Row>
-          <Row>
-            <Col style={styles.controls}>
-              {!running && <Button style={styles.playButton} onClick={this.handleStart}>Play</Button>}
-              {running && <Button style={styles.pauseButton} onClick={this.handleStop}>Pause</Button>}
-              <Button onClick={this.handleReset}>Reset</Button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+              <div className="BtnGroup d-flex flex-justify-center mt-3">
+                {!running && (
+                  <button className="btn BtnGroup-item" onClick={this.handleStart}>
+                    Play
+                  </button>
+                )}
+                {running && (
+                  <button className="btn BtnGroup-item" onClick={this.handleStop}>
+                    Pause
+                  </button>
+                )}
+                <button className="btn BtnGroup-item" onClick={this.handleReset}>Reset</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </>
     );
   }
 }

@@ -1,5 +1,5 @@
 import { run, MoveError } from "./engine";
-import { UIFrame } from './ui';
+import { UIFrame } from "./ui";
 
 describe("engine", async () => {
   it("runs a simple game", async () => {
@@ -9,13 +9,13 @@ describe("engine", async () => {
       },
       move() {
         return { move: "up" };
-      }
+      },
     };
     const canceller = {
       cancelled() {
         return false;
-      }
-    }
+      },
+    };
 
     const frames: UIFrame[] = [];
     const cb = (frame: UIFrame) => {

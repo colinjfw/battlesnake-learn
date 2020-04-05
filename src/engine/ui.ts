@@ -1,4 +1,4 @@
-import { MoveAPI, Snake as SnakeAPI, Point } from './types';
+import { MoveAPI, Snake as SnakeAPI, Point } from "./types";
 
 export interface UISnakePoint {
   x: number;
@@ -42,10 +42,10 @@ export function toUIFrame(move: MoveAPI): UIFrame {
       health: move.you.health,
       isDead: !!move.you.death,
       death: move.you.death,
-      body: move.you.body.map((_, idx) => formatBody(move.you, idx))
+      body: move.you.body.map((_, idx) => formatBody(move.you, idx)),
     },
     food: move.board.food,
-  }
+  };
 }
 
 function formatBody(snake: SnakeAPI, partIdx: number): UISnakePoint {
@@ -55,7 +55,7 @@ function formatBody(snake: SnakeAPI, partIdx: number): UISnakePoint {
     ...part,
     direction: next ? getDirection(part, next) : headDirection(snake),
     shouldRender: !isCovered(snake, partIdx),
-    type: getType(snake, partIdx)
+    type: getType(snake, partIdx),
   };
 }
 

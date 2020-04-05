@@ -1,7 +1,7 @@
 export const colors = {
-  pageBackground: "#fff",
-  gridBackground: "#fff",
-  cellBackground: "#f1f1f1",
+  pageBackground: "#202124",
+  gridBackground: "#202124",
+  cellBackground: "#393e42",
   healthBarDeathBackground: "#333",
   food: "#ff5a72",
   healthBar: "#0f0",
@@ -10,5 +10,5 @@ export const colors = {
   darkText: "#000",
 
   // colour names
-  white: "#fff"
+  white: "#fff",
 };

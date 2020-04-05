@@ -5,7 +5,8 @@ import { Snake, Food } from "../engine";
 import { headSvg, tailSvg } from "./svg";
 
 const styles = {
-  height: 290
+  width: "100%",
+  height: "85%",
 };
 
 interface BoardProps {
@@ -27,6 +28,7 @@ class Board extends React.Component<BoardProps> {
         style={{ display: "block", margin: "auto" }}
         viewBox="0 0 90 90"
         height={styles.height}
+        width={styles.width}
       >
         <rect x="0" y="0" width="90" height="90" fill={colors.pageBackground} />
 
