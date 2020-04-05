@@ -1,5 +1,3 @@
-## 2. Understanding the Move Command
-
 In our first version of our snake we started with a function that returns a
 static direction. This causes our snake to go to the right side of the board
 until it runs into the wall. Let's inspect what that 'state' parameter looks

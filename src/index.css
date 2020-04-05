@@ -1,8 +1,11 @@
 .height-page {
-  height: calc(100vh - 75px);
+  height: calc(100vh - 65px);
+}
+.height-page2 {
+  height: calc(100vh - 130px);
 }
 header {
-  height: 75px;
+  height: 65px;
 }
 .bg-vs-dark {
   background-color: #202124;

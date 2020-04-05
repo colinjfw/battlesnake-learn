@@ -1,5 +1,3 @@
-## 1. Basics of Battlesnake
-
 Foundational knowledge of Javascript and Node.js isn't covered in this guide,
 but feel free to follow along to get a taste for how to start thinking like a
 Battlesnake developer!
@@ -50,6 +48,9 @@ the below code to the code panel to your right and reset the game board.
 ```javascript
 function move() {
   return { move: "up" };
+}
+function start() {
+  return { color: "green" };
 }
 ```
 

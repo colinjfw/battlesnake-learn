@@ -114,23 +114,14 @@ class App extends React.Component<{}, AppState> {
           </div>
         </header>
         <main className="height-page d-flex flex-content-stretch">
-          <div className="flex-1 markdown-body bg-gray-light position-relative height-page overflow-scroll p-4">
-            <Tutorial />
-            <div className="BtnGroup d-flex flex-justify-center p-3">
-              {tutorial > 0 && (
-                <button className="btn BtnGroup-item" onClick={this.handlePrev}>
-                  &lt; Back
-                </button>
-              )}
-              {tutorial < tutorials.length - 1 && (
-                <button
-                  className="btn BtnGroup-item btn-primary"
-                  onClick={this.handleNext}
-                >
-                  Next &gt;
-                </button>
-              )}
-            </div>
+          <div className="flex-1 bg-gray-light height-page d-flex flex-column">
+            <Tutorial
+              code={code}
+              next={
+                tutorial < tutorials.length - 1 ? this.handleNext : undefined
+              }
+              prev={tutorial > 0 ? this.handlePrev : undefined}
+            />
           </div>
           <div className="flex-1 bg-vs-dark height-page overflow-hidden">
             <Editor

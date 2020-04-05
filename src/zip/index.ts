@@ -1,0 +1,15 @@
+import Zip from "jszip";
+import raw from "raw.macro";
+import { saveAs } from "file-saver";
+
+function Lambda(js: string) {
+  const file = new Zip();
+  file.file("README.md", raw("./lambda/README.md"));
+  file.file("index.js", js + "\n" + raw("./lambda/index.js"));
+
+  file.generateAsync({ type: "blob" }).then((val) => {
+    saveAs(val, "lambda.zip");
+  });
+}
+
+export const targets = [Lambda];
