@@ -88,7 +88,7 @@ export const Download = (props: Props) => (
             className="btn BtnGroup-item"
             onClick={() => target(props.code)}
           >
-            {target.name}
+            {target.title}
           </button>
         ))}
       </div>

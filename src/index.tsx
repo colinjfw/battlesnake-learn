@@ -112,6 +112,14 @@ class App extends React.Component<{}, AppState> {
           <div className="Header-item Header-item--full f3 text-mono">
             Learn to Battlesnake!
           </div>
+          <div className="Header-item">
+            <a
+              target="_blank"
+              href="https://github.com/colinjfw/battlesnake-learn"
+            >
+              Contribute on GitHub
+            </a>
+          </div>
         </header>
         <main className="height-page d-flex flex-content-stretch">
           <div className="flex-1 bg-gray-light height-page d-flex flex-column">

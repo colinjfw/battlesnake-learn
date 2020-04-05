@@ -14,4 +14,6 @@ function Lambda(js: string) {
   });
 }
 
+Lambda.title = "AWS Lambda";
+
 export const targets = [Lambda];
