@@ -37,7 +37,7 @@ class App extends React.Component<{}, AppState> {
 
   componentDidMount = () => {
     setTimeout(this.handleStart, 1000);
-  }
+  };
 
   cancelled = () => !!this.state.cancelled;
 
@@ -48,7 +48,7 @@ class App extends React.Component<{}, AppState> {
     this.editor.onDidChangeModelContent(() => {
       this.handleCodeChange(this.editor!.getValue());
     });
-  }
+  };
 
   handleSetTutorial = (change: number) => {
     const tutorial = this.state.tutorial + change;
@@ -105,7 +105,9 @@ class App extends React.Component<{}, AppState> {
       <>
         <header className="Header bg-gray-dark">
           <div className="Header-item">
-            <a href="https://battlesnake.com" target="_blank"><Logo /></a>
+            <a href="https://battlesnake.com" target="_blank">
+              <Logo />
+            </a>
           </div>
           <div className="Header-item Header-item--full f3 text-mono">
             Learn to Battlesnake!
@@ -121,7 +123,10 @@ class App extends React.Component<{}, AppState> {
                 </button>
               )}
               {tutorial < tutorials.length - 1 && (
-                <button className="btn BtnGroup-item btn-primary" onClick={this.handleNext}>
+                <button
+                  className="btn BtnGroup-item btn-primary"
+                  onClick={this.handleNext}
+                >
                   Next &gt;
                 </button>
               )}
@@ -145,7 +150,7 @@ class App extends React.Component<{}, AppState> {
           </div>
           <div className="flex-1 bg-vs-dark height-page border-left">
             <div className="p-2 height-page">
-              <div className="text-center text-red" style={{ height: '25px' }}>
+              <div className="text-center text-red" style={{ height: "25px" }}>
                 {error && error.message}
               </div>
               <Board
@@ -156,16 +161,27 @@ class App extends React.Component<{}, AppState> {
               />
               <div className="BtnGroup d-flex flex-justify-center mt-3">
                 {!running && (
-                  <button className="btn BtnGroup-item" onClick={this.handleStart}>
+                  <button
+                    className="btn BtnGroup-item"
+                    onClick={this.handleStart}
+                  >
                     Play
                   </button>
                 )}
                 {running && (
-                  <button className="btn BtnGroup-item" onClick={this.handleStop}>
+                  <button
+                    className="btn BtnGroup-item"
+                    onClick={this.handleStop}
+                  >
                     Pause
                   </button>
                 )}
-                <button className="btn BtnGroup-item" onClick={this.handleReset}>Reset</button>
+                <button
+                  className="btn BtnGroup-item"
+                  onClick={this.handleReset}
+                >
+                  Reset
+                </button>
               </div>
             </div>
           </div>
