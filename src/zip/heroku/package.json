@@ -1,0 +1,10 @@
+{
+  "name": "battlesnake-node",
+  "description": "A simple BattleSnake AI written in Javascript for NodeJS",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3"
+  }
+}
