@@ -1,5 +1,5 @@
 Over the next few steps we are going to build logic to avoid hitting a wall.
-What we'll replicate in code is essentially 3 steps:
+What we'll replicate in code is essentially 2 steps:
 
 1. Inspect the directions that we can move our head.
 1. Check if any potential directions are off of the board
@@ -39,7 +39,6 @@ function moveAsCoord(move, head) {
 
 Now we can scaffold out the next step of our move. We get the set of moves that
 we can make, loop over them and then find the point that we'll end up at:
-
 
 ```javascript
 function move(state) {
