@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/battlesnake-learn/precache-manifest.c651250c0c2aa23a61aee1e694528999.js"
+  "/battlesnake-learn/precache-manifest.8617ec05f3a19dba8235e4bb9351d599.js"
 );
 
 workbox.clientsClaim();
