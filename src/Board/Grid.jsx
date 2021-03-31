@@ -28,7 +28,7 @@ function getPartXOffset(part) {
 }
 
 function getPartYOffset(part) {
-  const yBias = part.direction === "up" ? -CELL_SPACING : 0;
+  const yBias = part.direction === "down" ? -CELL_SPACING : 0;
   return toGridSpace(part.y) + yBias;
 }
 
@@ -46,9 +46,9 @@ function getTailXOffset(part) {
 function getTailYOffset(part) {
   switch (part.direction) {
     case "up":
-      return toGridSpace(part.y) - CELL_SPACING;
-    case "down":
       return toGridSpace(part.y) + CELL_SPACING;
+    case "down":
+      return toGridSpace(part.y) - CELL_SPACING;
     default:
       return toGridSpace(part.y);
   }

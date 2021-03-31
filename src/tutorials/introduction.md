@@ -18,25 +18,25 @@ The game Snake is played out over a grid which looks roughly like this:
 
 ```
 - - - - - - - - - - - - - - -
-|0,0|   |   |   |   |   |7,0|
-- - - - - - - - - - - - - - -
-|   |   |   |   |   |   |   |
-- - - - - - - - - - - - - - -
-|   |   |   |   |   |   |   |
-- - - - - - - - - - - - - - -
-|   |   |   |   |   |   |   |
-- - - - - - - - - - - - - - -
-|   |   |   |   |   |   |   |
-- - - - - - - - - - - - - - -
-|   |   |   |   |   |   |   |
-- - - - - - - - - - - - - - -
 |0,7|   |   |   |   |   |7,7|
+- - - - - - - - - - - - - - -
+|   |   |   |   |   |   |   |
+- - - - - - - - - - - - - - -
+|   |   |   |   |   |   |   |
+- - - - - - - - - - - - - - -
+|   |   |   |   |   |   |   |
+- - - - - - - - - - - - - - -
+|   |   |   |   |   |   |   |
+- - - - - - - - - - - - - - -
+|   |   |   |   |   |   |   |
+- - - - - - - - - - - - - - -
+|0,0|   |   |   |   |   |7,0|
 - - - - - - - - - - - - - - -
 ```
 
 The size of the grid is determined at the start of the game. We express the
 coordinates of a specific point on this grid in (x, y) format. Note that the y
-axis 0 is at the top of the board.
+axis 0 is at the bottom of the board.
 
 #### Using this guide
 
