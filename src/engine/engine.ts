@@ -40,11 +40,11 @@ export const initialFrame: Frame = {
     body: [
       {
         x: 5,
-        y: 5,
+        y: 6,
       },
       {
         x: 5,
-        y: 6,
+        y: 5,
       },
     ],
   },
@@ -118,12 +118,12 @@ function moveTransform(frame: Frame, move: string): Point {
   const head = Object.assign({}, snake.body[0]);
   switch (move) {
     case "up":
-      head.y -= 1;
-      if (head.y < 0) offBoard();
+      head.y += 1;
+      if (head.y  >= height) offBoard();
       break;
     case "down":
-      head.y += 1;
-      if (head.y >= height) offBoard();
+      head.y -= 1;
+      if (head.y < 0 ) offBoard();
       break;
     case "left":
       head.x -= 1;
@@ -136,6 +136,8 @@ function moveTransform(frame: Frame, move: string): Point {
     default:
       throw new MoveError(`Unkown move "${move}"`, turn);
   }
+   
+
 
   snake.body.forEach((part) => {
     if (part.x === head.x && part.y === head.y)

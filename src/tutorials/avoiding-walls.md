@@ -26,9 +26,9 @@ that calculates our position after a move is made:
 function moveAsCoord(move, head) {
   switch (move) {
     case 'up':
-      return {x: head.x, y: head.y-1};
-    case 'down':
       return {x: head.x, y: head.y+1};
+    case 'down':
+      return {x: head.x, y: head.y-1};
     case 'left':
       return {x: head.x-1, y: head.y};
     case 'right':

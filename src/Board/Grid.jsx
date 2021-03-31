@@ -6,8 +6,11 @@ const DEAD_OPACITY = 0.15;
 const CELL_SIZE = 20;
 const CELL_SPACING = 4;
 
-function toGridSpace(slot) {
+function toGridSpaceWidth(slot) {
   return (CELL_SIZE + CELL_SPACING) * slot + CELL_SPACING;
+}
+function toGridSpaceHeight(slot) {
+  return (CELL_SIZE + CELL_SPACING) * (9-slot) + CELL_SPACING ;
 }
 
 function getPartWidth(part) {
@@ -24,55 +27,55 @@ function getPartHeight(part) {
 
 function getPartXOffset(part) {
   const xBias = part.direction === "left" ? -CELL_SPACING : 0;
-  return toGridSpace(part.x) + xBias;
+  return toGridSpaceWidth(part.x) + xBias;
 }
 
 function getPartYOffset(part) {
-  const yBias = part.direction === "up" ? -CELL_SPACING : 0;
-  return toGridSpace(part.y) + yBias;
+  const yBias = part.direction === "down" ? -CELL_SPACING : 0;
+  return toGridSpaceHeight(part.y) + yBias;
 }
 
 function getTailXOffset(part) {
   switch (part.direction) {
     case "left":
-      return toGridSpace(part.x) - CELL_SPACING;
+      return toGridSpaceWidth(part.x) - CELL_SPACING;
     case "right":
-      return toGridSpace(part.x) + CELL_SPACING;
+      return toGridSpaceWidth(part.x) + CELL_SPACING;
     default:
-      return toGridSpace(part.x);
+      return toGridSpaceWidth(part.x);
   }
 }
 
 function getTailYOffset(part) {
   switch (part.direction) {
     case "up":
-      return toGridSpace(part.y) - CELL_SPACING;
+      return toGridSpaceHeight(part.y) + CELL_SPACING;
     case "down":
-      return toGridSpace(part.y) + CELL_SPACING;
+      return toGridSpaceHeight(part.y) - CELL_SPACING;
     default:
-      return toGridSpace(part.y);
+      return toGridSpaceHeight(part.y);
   }
 }
 
 function getHeadXOffset(part) {
   switch (part.direction) {
     case "left":
-      return toGridSpace(part.x);
+      return toGridSpaceWidth(part.x);
     case "right":
-      return toGridSpace(part.x);
+      return toGridSpaceWidth(part.x);
     default:
-      return toGridSpace(part.x);
+      return toGridSpaceWidth(part.x);
   }
 }
 
 function getHeadYOffset(part) {
   switch (part.direction) {
     case "up":
-      return toGridSpace(part.y);
+      return toGridSpaceHeight(part.y);
     case "down":
-      return toGridSpace(part.y);
+      return toGridSpaceHeight(part.y);
     default:
-      return toGridSpace(part.y);
+      return toGridSpaceHeight(part.y);
   }
 }
 
@@ -107,9 +110,9 @@ function getHeadTransform(direction, viewBox) {
     case "left":
       return `rotate(180 ${halfX} ${halfY})`;
     case "up":
-      return `rotate(-90 ${halfX} ${halfY})`;
-    case "down":
       return `rotate(90 ${halfX} ${halfY})`;
+    case "down":
+      return `rotate(-90 ${halfX} ${halfY})`;
     default:
       return "";
   }
@@ -122,9 +125,9 @@ function getTailTransform(direction, viewBox) {
     case "right":
       return `rotate(180 ${halfX} ${halfY})`;
     case "down":
-      return `rotate(-90 ${halfX} ${halfY})`;
-    case "up":
       return `rotate(90 ${halfX} ${halfY})`;
+    case "up":
+      return `rotate(-90 ${halfX} ${halfY})`;
     default:
       return "";
   }
@@ -242,8 +245,8 @@ class Grid extends React.Component {
     // Make alive snakes render on top of dead snakes
     const sortedSnakes = sortAliveSnakesOnTop(unsortedSnakes);
 
-    const viewBoxWidth = toGridSpace(this.props.columns);
-    const viewBoxHeight = toGridSpace(this.props.rows);
+    const viewBoxWidth = toGridSpaceWidth(this.props.columns);
+    const viewBoxHeight = toGridSpaceWidth(this.props.rows);
 
     return (
       <svg
@@ -265,8 +268,8 @@ class Grid extends React.Component {
           range(this.props.columns).map((_, col) => (
             <rect
               key={"cell" + row + "," + col}
-              x={toGridSpace(col)}
-              y={toGridSpace(row)}
+              x={toGridSpaceWidth(col)}
+              y={toGridSpaceWidth(row)}
               width={CELL_SIZE}
               height={CELL_SIZE}
               fill={colors.cellBackground}
@@ -291,8 +294,8 @@ class Grid extends React.Component {
         {food.map((f, foodIndex) => (
           <circle
             key={"food" + foodIndex}
-            cx={toGridSpace(f.x) + CELL_SIZE / 2}
-            cy={toGridSpace(f.y) + CELL_SIZE / 2}
+            cx={toGridSpaceWidth(f.x) + CELL_SIZE / 2}
+            cy={toGridSpaceHeight(f.y) + CELL_SIZE / 2}
             r={CELL_SIZE / 2}
             fill={colors.food}
             opacity={this.props.highlightedSnake ? HIGHLIGHT_DIM : null}
